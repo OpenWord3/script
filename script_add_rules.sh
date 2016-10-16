@@ -34,17 +34,17 @@ if [[ $regle == "1" ]]
 
         if [[ $proto == "tcp" ]]
             then
-                echo " " >> /opt/scripts/firewall.sh
-            	echo "sudo iptables -t nat -A PREROUTING -p tcp -d $ip_routeur --dport $port_dst_ext -m state --state new --syn -j DNAT --to-destination $ip_lan:$port_dst_int" >> /opt/scripts/firewall.sh
-            	echo "sudo iptables -t filter -A FORWARD -p tcp -d $ip_lan --dport $port_dst_int -m state --state new --syn -j ACCEPT" >> /opt/scripts/firewall.sh
-                echo " " >> /opt/scripts/firewall.sh
+                echo " " >> /opt/script/firewall.sh
+            	echo "sudo iptables -t nat -A PREROUTING -p tcp -d $ip_routeur --dport $port_dst_ext -m state --state new --syn -j DNAT --to-destination $ip_lan:$port_dst_int" >> /opt/script/firewall.sh
+            	echo "sudo iptables -t filter -A FORWARD -p tcp -d $ip_lan --dport $port_dst_int -m state --state new --syn -j ACCEPT" >> /opt/script/firewall.sh
+                echo " " >> /opt/script/firewall.sh
         	
         elif [[ $proto == "udp" ]]
             then
-                echo " " >> /opt/scripts/firewall.sh
-            	echo "sudo iptables -t nat -A PREROUTING -p udp -d $ip_routeur --dport $port_dst_ext -m state --state new -j DNAT --to-destination $ip_lan:$port_dst_int" >> /opt/scripts/firewall.sh
-                echo "sudo iptables -t filter -A FORWARD -p udp -d $ip_lan --dport $port_dst_int -m state --state new -j ACCEPT" >> /opt/scripts/firewall.sh
-                echo " " >> /opt/scripts/firewall.sh
+                echo " " >> /opt/script/firewall.sh
+            	echo "sudo iptables -t nat -A PREROUTING -p udp -d $ip_routeur --dport $port_dst_ext -m state --state new -j DNAT --to-destination $ip_lan:$port_dst_int" >> /opt/script/firewall.sh
+                echo "sudo iptables -t filter -A FORWARD -p udp -d $ip_lan --dport $port_dst_int -m state --state new -j ACCEPT" >> /opt/script/firewall.sh
+                echo " " >> /opt/script/firewall.sh
         fi
 
 elif [[ $regle == "2" ]]
@@ -95,10 +95,10 @@ elif [[ $regle == "2" ]]
             echo "Entrer un protocole valide";
         fi
         
-        echo " " >> /opt/scripts/firewall.sh
-        echo "sudo iptables -A INPUT -m state --state NEW $ligne_protocole $ligne_ip_source $ligne_port_source $ligne_ip_destination $ligne_port_destination -j LOG" >> /opt/scripts/firewall.sh
-        echo "sudo iptables -A INPUT -m state --state NEW $ligne_protocole $ligne_ip_source $ligne_port_source $ligne_ip_destination $ligne_port_destination -j $valide" >> /opt/scripts/firewall.sh
-        echo " " >> /opt/scripts/firewall.sh
+        echo " " >> /opt/script/firewall.sh
+        echo "sudo iptables -A INPUT -m state --state NEW $ligne_protocole $ligne_ip_source $ligne_port_source $ligne_ip_destination $ligne_port_destination -j LOG" >> /opt/script/firewall.sh
+        echo "sudo iptables -A INPUT -m state --state NEW $ligne_protocole $ligne_ip_source $ligne_port_source $ligne_ip_destination $ligne_port_destination -j $valide" >> /opt/script/firewall.sh
+        echo " " >> /opt/script/firewall.sh
 
 
 elif [[ $regle == "3" ]]
@@ -149,20 +149,20 @@ elif [[ $regle == "3" ]]
             echo "Entrer un protocole valide";
         fi
 
-        echo " " >> /opt/scripts/firewall.sh
-        echo "sudo iptables -A OUTPUT -m state --state NEW $ligne_protocole $ligne_ip_source $ligne_port_source $ligne_ip_destination $ligne_port_destination -j LOG" >> /opt/scripts/firewall.sh
-        echo "sudo iptables -A OUTPUT -m state --state NEW $ligne_protocole $ligne_ip_source $ligne_port_source $ligne_ip_destination $ligne_port_destination -j $valide" >> /opt/scripts/firewall.sh
-        echo " " >> /opt/scripts/firewall.sh
+        echo " " >> /opt/script/firewall.sh
+        echo "sudo iptables -A OUTPUT -m state --state NEW $ligne_protocole $ligne_ip_source $ligne_port_source $ligne_ip_destination $ligne_port_destination -j LOG" >> /opt/script/firewall.sh
+        echo "sudo iptables -A OUTPUT -m state --state NEW $ligne_protocole $ligne_ip_source $ligne_port_source $ligne_ip_destination $ligne_port_destination -j $valide" >> /opt/script/firewall.sh
+        echo " " >> /opt/script/firewall.sh
 
 elif [[ $regle == "4" ]]
     then
-       sudo /opt/scripts/script_firewall.sh
+       sudo /opt/script/script_firewall.sh
 
 else
     echo "Entrer une valeur correcte"
 fi
 
 #Execution du script de configuration
-sudo /opt/scripts/firewall.sh
+sudo /opt/script/firewall.sh
 
-sudo iptables-save > /opt/scripts/firewall.conf
+sudo iptables-save > /opt/script/firewall.conf

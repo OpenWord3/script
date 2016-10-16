@@ -6,7 +6,7 @@
 #                                     #
 #######################################
 
-repertoire="/opt/scripts"
+repertoire="/opt/script"
 repertoire1="opt/rootpki/root_cbi"
 
 reponse="oui"

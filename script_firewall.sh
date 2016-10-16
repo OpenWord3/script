@@ -23,15 +23,15 @@ done
 
 if [[ $choix == "1" ]]
     then
-    	/opt/scripts/script_add_rules.sh
+    	/opt/script/script_add_rules.sh
 
 elif [[ $choix == "2" ]]
 	then
-		/opt/scripts/script_del_rules.sh
+		/opt/script/script_del_rules.sh
 
 elif [[ $choix == "3" ]]
 	then
-		/opt/scripts/script_nat.sh
+		/opt/script/script_nat.sh
                 
 elif [[ $choix == "4" ]]
 	then

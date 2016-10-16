@@ -200,7 +200,7 @@ case $choix in
 		let h--
 		certif_fille=${tableau[$h]}
 		rm random
-		echo "Choisissez le nom du certificat serveur à révoquer"
+		echo "Choisissez le nom du certificat client à révoquer"
 		ls -Ad /opt/rootpki/$certif_fille/*/ | cut -d"/" -f5 > random
 		sed '/^archives$/d' random > random1 && mv -f random1 random; rm -f random1
 		sed '/^newcerts$/d' random > random1 && mv -f random1 random; rm -f random1
@@ -218,7 +218,7 @@ case $choix in
 		client=${tableau[$e]}
 		rm random
 		/$repertoire/revocation_client.sh $client $certif_fille
-		echo "Le certificat client $serveur du certificat fille $certif_fille a bien été révoqué"
+		echo "Le certificat client $client du certificat fille $certif_fille a bien été révoqué"
 	;;
 esac
 	echo "Lisez bien les propositions svp"

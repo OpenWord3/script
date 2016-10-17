@@ -31,6 +31,7 @@ if [ -z $verif ];then
 			echo "le serveur $server à bien été créé"		
 			;;
 		esac
+	fi	
 else
 	echo "Que souhaitez-vous faire ?"
 	reponse3=1

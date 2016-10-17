@@ -3,12 +3,9 @@
 verif=`ls /opt/vpn/x.509/server/ | grep tun1.conf`
 
 if [ -z $verif ];then
-	echo "Vous n'avez pas encore de serveur, voulez-vous créer un ? oui/non
-"
+	echo "Vous n'avez pas encore de serveur, voulez-vous créer un ? oui/non"
 	read reponse
 	if [ $reponse == "oui" ];then
-		#echo "Entrez le nom du serveur"
-		#read server
 		server="server_x.509"
 		echo "choisissez une option"
 		echo "1- client-to-client"
@@ -19,19 +16,20 @@ if [ -z $verif ];then
 			/opt/vpn/x.509/easy-rsa/build-ca
 			/opt/vpn/x.509/easy-rsa/build-key-server $server
 			/opt/vpn/x.509/easy-rsa/build-dh
-			`cp /opt/vpn/x.509/easy-rsa/keys/$server.key /opt/vpn/x.509/server/`
-			`cp /opt/vpn/x.509/easy-rsa/keys/$server.cert /opt/vpn/x.509/server/`	
-			echo "Je dois ecrire un script qui remplit le fichier tun0.conf"
+			cp /opt/vpn/x.509/easy-rsa/keys/$server.key /opt/vpn/x.509/server/
+			cp /opt/vpn/x.509/easy-rsa/keys/$server.cert /opt/vpn/x.509/server/	
+			/opt/script/script_ecriture.sh "2"
+			echo "le serveur $server à bien été créé"
 			;;
 			"2")
                         /opt/vpn/x.509/easy-rsa/build-ca
                         /opt/vpn/x.509/easy-rsa/build-key-server $server
                         /opt/vpn/x.509/easy-rsa/build-dh
-                        `cp /opt/vpn/x.509/easy-rsa/keys/$server.key /opt/vpn/x.509/server/`
-                        `cp /opt/vpn/x.509/easy-rsa/keys/$server.cert /opt/vpn/x.509/server/`
-                        echo "Je dois ecrire un script qui remplit le fichier tun0.conf"			
+                        cp /opt/vpn/x.509/easy-rsa/keys/$server.key /opt/vpn/x.509/server/
+                        cp /opt/vpn/x.509/easy-rsa/keys/$server.cert /opt/vpn/x.509/server/
+                        /opt/script/script_ecriture.sh "1"
+			echo "le serveur $server à bien été créé"		
 			;;
-			`echo "le serveur $server à bien été créé"` 
 		esac
 else
 	echo "Que souhaitez-vous faire ?"
@@ -50,8 +48,8 @@ else
 	case $reponse3 in
 		"1")
 			openvpn --config /opt/vpn/x.509/server/tun1.conf --verb 6
-			echo "Le serveur est bien lancé
-"		;;
+			echo "Le serveur est bien lancé"
+		;;
 		"2")
 			pkill openvpn
 			echo "Le serveur à bien été stopper"
@@ -90,7 +88,7 @@ else
 			/opt/vpn/x.509/easy-rsa/revoke-full $client_revoque
 			rm /opt/vpn/x.509/easy-rsa/keys/$client_revoque.*
 			mv /opt/vpn/x.509/clients/$client_revoque.* /opt/vpn/x.509/clients/archives/
-			`cp /opt/vpn/x.509/easy-rsa/keys/crl.pem /opt/vpn/x.509/server/`
+			cp /opt/vpn/x.509/easy-rsa/keys/crl.pem /opt/vpn/x.509/server/
 		;;
 		"5")
 			/opt/script/script_ecriture.sh "2"
@@ -108,4 +106,7 @@ else
 			rm /opt/vpn/x.509/clients/*
 			rm /opt/vpn/x.509/clients/archives/*
 			echo "La suppression de la configuration à bien été effectuée"
-		fi	
+		fi
+		;;
+	esac
+fi	

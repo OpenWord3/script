@@ -61,12 +61,16 @@ sudo iptables -t filter -A INPUT -m state --state NEW -i ens3 -p tcp --dport 22 
 sudo iptables -t filter -A OUTPUT -m state --state NEW -o ens3 -p tcp --dport 22 --syn -j LOG
 sudo iptables -t filter -A OUTPUT -m state --state NEW -o ens3 -p tcp --dport 22 --syn -j ACCEPT
 
+#ouverture interface tun0 et tun1
+iptables -t filter -A INPUT -p udp --dport 1194 -j ACCEPT
+iptables -t filter -A INPUT -p tcp --dport 1194 -j ACCEPT
+iptables -t filter -A INPUT -i tun0 -j ACCEPT
+iptables -t filter -A OUTPUT -o tun0 -j ACCEPT
+iptables -t filter -A INPUT -i tun1 -j ACCEPT
+iptables -t filter -A OUTPUT -o tun1 -j ACCEPT
 #----------------------------------------------------------------------------------------------------------#
 
-iptables -t filter -A INPUT -p icmp -j ACCEPT
-iptables -t filter -A OUTPUT -p icmp -j ACCEPT 
-iptables -t filter -A INPUT -p udp --dport 1194 -j ACCEPT 
-iptables -t filter -A INPUT -i tun0 -j ACCEPT 
-iptables -t filter -A OUTPUT -o tun0 -j ACCEPT 
- 
+#iptables -t nat -A POSTROUTING -j MASQUERADE
+
+#----------------------------------------------------------------------------------------------------------#
  

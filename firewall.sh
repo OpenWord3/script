@@ -63,8 +63,10 @@ sudo iptables -t filter -A OUTPUT -m state --state NEW -o enp0s3 -p tcp --dport 
 
 #----------------------------------------------------------------------------------------------------------#
 
- 
- 
- 
+iptables -t filter -A INPUT -p icmp -j ACCEPT
+iptables -t filter -A OUTPUT -p icmp -j ACCEPT 
+iptables -t filter -A INPUT -p udp --dport 1194 -j ACCEPT 
+iptables -t filter -A INPUT -i tun0 -j ACCEPT 
+iptables -t filter -A OUTPUT -o tun0 -j ACCEPT 
  
  

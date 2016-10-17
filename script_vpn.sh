@@ -13,18 +13,20 @@ if [ -z $verif ];then
 		read reponse2
 		case $reponse2 in
 			"1")
-			/opt/vpn/x.509/easy-rsa/build-ca
-			/opt/vpn/x.509/easy-rsa/build-key-server $server
-			/opt/vpn/x.509/easy-rsa/build-dh
+			source /opt/vpn/x.509/easy-rsa/vars
+			source /opt/vpn/x.509/easy-rsa/build-ca
+			source /opt/vpn/x.509/easy-rsa/build-key-server $server
+			source /opt/vpn/x.509/easy-rsa/build-dh
 			cp /opt/vpn/x.509/easy-rsa/keys/$server.key /opt/vpn/x.509/server/
 			cp /opt/vpn/x.509/easy-rsa/keys/$server.cert /opt/vpn/x.509/server/	
 			/opt/script/script_ecriture.sh "2"
 			echo "le serveur $server à bien été créé"
 			;;
 			"2")
-                        /opt/vpn/x.509/easy-rsa/build-ca
-                        /opt/vpn/x.509/easy-rsa/build-key-server $server
-                        /opt/vpn/x.509/easy-rsa/build-dh
+                        source /opt/vpn/x.509/easy-rsa/vars
+                        source /opt/vpn/x.509/easy-rsa/build-ca
+                        source /opt/vpn/x.509/easy-rsa/build-key-server $server
+                        source /opt/vpn/x.509/easy-rsa/build-dh
                         cp /opt/vpn/x.509/easy-rsa/keys/$server.key /opt/vpn/x.509/server/
                         cp /opt/vpn/x.509/easy-rsa/keys/$server.cert /opt/vpn/x.509/server/
                         /opt/script/script_ecriture.sh "1"
